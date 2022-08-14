@@ -23,44 +23,44 @@
   </div>
 </template>
 <script>
-import EventService from '@/services/EventService.js'
+import EventService from "@/services/EventService.js";
 export default {
-  props: ['id'],
+  props: ["id"],
   data() {
     return {
       event: null,
-      air: null
-    }
+      air: null,
+    };
   },
   created() {
     EventService.getEvent(this.id)
       .then((response) => {
-        this.event = response.data
+        this.event = response.data;
       })
       .catch((error) => {
         if (error.response && error.response.status == 404) {
           this.$router.push({
-            name: '404Resource',
-            params: { resource: 'event' }
-          })
+            name: "404Resource",
+            params: { resource: "event" },
+          });
         } else {
-          this.$router.push({ name: 'NetworkError' })
+          this.$router.push({ name: "NetworkError" });
         }
-      })
+      });
     EventService.getEventAir(this.id)
       .then((response) => {
-        this.air = response.data
+        this.air = response.data;
       })
       .catch((error) => {
         if (error.response && error.response.status == 404) {
           this.$router.push({
-            name: '404Resource',
-            params: { resource: 'air' }
-          })
+            name: "404Resource",
+            params: { resource: "air" },
+          });
         } else {
-          this.$router.push({ name: 'NetworkError' })
+          this.$router.push({ name: "NetworkError" });
         }
-      })
-  }
-}
+      });
+  },
+};
 </script>
